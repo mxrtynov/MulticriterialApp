@@ -4,8 +4,7 @@ namespace MulticriterialApp.Services
 {
     public static class WeightService
     {
-        // Метод ранга: ранг 1 — самый важный
-        // w_i = (n - r_i + 1) / Σ(n - r_j + 1)
+
         public static double[] RankMethodWeights(double[] ranks)
         {
             int n = ranks.Length;
@@ -16,7 +15,10 @@ namespace MulticriterialApp.Services
 
         public static double[] AverageWeights(double[] w1, double[] w2)
         {
-            return w1.Zip(w2, (a, b) => (a + b) / 2.0).ToArray();
+            var result = new double[w1.Length];
+            for (int i = 0; i < w1.Length; i++)
+                result[i] = (w1[i] + w2[i]) / 2.0;
+            return result;
         }
     }
 }
